@@ -37,13 +37,15 @@ app.get("/health/supabase", async (_req, res) => {
     .select("id")
     .limit(1);
 
-  if (error) {
-    return res.status(503).json({
-      ok: false,
-      service: "supabase",
-      error: "No se pudo consultar la tabla leagues"
-    });
-  }
+if (error) {
+  console.error("Error de Supabase:", error);
+  return res.status(503).json({
+    ok: false,
+    service: "supabase",
+    error: error.message,
+    code: error.code
+  });
+}
 
   return res.json({ ok: true, service: "supabase" });
 });
