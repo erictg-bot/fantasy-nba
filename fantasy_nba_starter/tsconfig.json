@@ -1,17 +1,16 @@
+
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "rootDir": ".",
+    "outDir": "dist",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "types": [
-      "node"
-    ],
-    "noEmit": true
+    "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "server/**/*.ts"
-  ]
+  "include": ["server/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
