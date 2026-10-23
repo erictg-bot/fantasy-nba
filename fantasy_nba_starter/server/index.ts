@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 
 const app = express();
-const port = Number(process.env.PORT || 3001);
+const port = Number(process.env.PORT) || 3000;
 const espnBase = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba";
 const cache = new Map<string, { expires: number; body: unknown }>();
 const CACHE_MS = Math.max(10_000, Number(process.env.ESPN_CACHE_MS || 30_000));
