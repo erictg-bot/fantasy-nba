@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import { supabase } from "./supabase.js";
 
 const app = express();
 const port = Number(process.env.PORT) || 3000;
@@ -30,6 +31,22 @@ async function cachedJson(key: string, url: string) {
 }
 
 app.get("/health", (_req, res) => res.json({ ok: true, service: "fantasy-nba-stats-adapter" }));
+app.get("/health/supabase", async (_req, res) => {
+  const { error } = await supabase
+    .from("leagues")
+    .select("id")
+    .limit(1);
+
+  if (error) {
+    return res.status(503).json({
+      ok: false,
+      service: "supabase",
+      error: "No se pudo consultar la tabla leagues"
+    });
+  }
+
+  return res.json({ ok: true, service: "supabase" });
+});
 
 app.get("/api/nba/scoreboard", async (req, res) => {
   const date = String(req.query.date || new Date().toISOString().slice(0, 10).replaceAll("-", ""));
