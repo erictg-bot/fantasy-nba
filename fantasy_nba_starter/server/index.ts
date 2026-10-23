@@ -36,7 +36,6 @@ app.get("/health/supabase", async (_req, res) => {
     .from("leagues")
     .select("id")
     .limit(1);
-
 if (error) {
   console.error("Error de Supabase:", error);
   return res.status(503).json({
