@@ -77,4 +77,10 @@ app.get("/api/nba/games/:eventId/summary", async (req, res) => {
   }
 });
 
+app.use(express.static(clientDir));
+
+app.get("*", (_req, res) => {
+  res.sendFile(path.join(clientDir, "index.html"));
+});
+
 app.listen(port, () => console.log(`Fantasy NBA stats adapter escuchando en :${port}`));
