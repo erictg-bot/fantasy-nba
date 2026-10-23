@@ -6,6 +6,8 @@ import { supabase } from "./supabase.js";
 
 const app = express();
 const port = Number(process.env.PORT) || 3000;
+const currentDir = path.dirname(fileURLToPath(import.meta.url));
+const clientDir = path.resolve(currentDir, "../client");
 const espnBase = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba";
 const cache = new Map<string, { expires: number; body: unknown }>();
 const CACHE_MS = Math.max(10_000, Number(process.env.ESPN_CACHE_MS || 30_000));
